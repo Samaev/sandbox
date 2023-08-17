@@ -17,4 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/extract-logos', [LogoExtractorController::class, 'extractLogos']);
+Routes::get('/home', function () {
+   return view('home');
+});
 
