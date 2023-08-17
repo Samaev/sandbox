@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MyPlaceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoExtractorController;
 /*
@@ -17,7 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/extract-logos', [LogoExtractorController::class, 'extractLogos']);
-Routes::get('/home', function () {
-   return view('home');
-});
+Route::get('/my-page', [MyPlaceController::class, 'index']);
 
