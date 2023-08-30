@@ -13,6 +13,10 @@ use App\Http\Controllers\LogoExtractorController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\WebPageExportController;
+
+Route::get('/export-webpage', [WebPageExportController::class, 'export']);
+
 
 Route::get('/', function () {
     return view('welcome');
