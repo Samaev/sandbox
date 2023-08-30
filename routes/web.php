@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HubSpotController;
 use App\Http\Controllers\MyPlaceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoExtractorController;
@@ -23,4 +24,5 @@ Route::get('/', function () {
 });
 Route::get('/extract-logos', [LogoExtractorController::class, 'extractLogos']);
 Route::get('/my-page', [MyPlaceController::class, 'index']);
+Route::post('/create-note', [HubSpotController::class, 'createNoteInTicket']);
 
