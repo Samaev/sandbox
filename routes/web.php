@@ -24,5 +24,5 @@ Route::get('/', function () {
 });
 Route::get('/extract-logos', [LogoExtractorController::class, 'extractLogos']);
 Route::get('/my-page', [MyPlaceController::class, 'index']);
-Route::post('/create-note', [HubSpotController::class, 'createNoteInTicket']);
+Route::get('/create-note', [HubSpotController::class, 'createNoteInTicket']);
 

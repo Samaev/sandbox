@@ -9,14 +9,14 @@ class HubSpotController extends Controller
 {
     public function createNoteInTicket(Request $request)
     {
-        $ticketId = $request->input('ticket_id'); // Ticket ID to which the note will be added
-        $noteContent = $request->input('note_content'); // Content of the note
+        $ticketId = env('HUBSPOT_TICKET_ID'); // Ticket ID to which the note will be added
+        $noteContent = "Content of the note";
 
-        $apiKey = 'YOUR_HUBSPOT_API_KEY';
-        $url = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$ticketId}/timeline";
+        $apiKey = env('HUBSPOT_API_KEY');
+        $url = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$ticketId}";
 
         $client = new Client();
-        $response = $client->post($url, [
+        $response = $client->get($url, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $apiKey,
                 'Content-Type' => 'application/json',
