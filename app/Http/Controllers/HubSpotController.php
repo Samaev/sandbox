@@ -9,11 +9,11 @@ class HubSpotController extends Controller
 {
     public function createNoteInTicket(Request $request)
     {
-        $ticketId = env('HUBSPOT_TICKET_ID'); // Ticket ID to which the note will be added
+        $ticketId = env('HUBSPOT_DEAL_ID'); // Ticket ID to which the note will be added
         $noteContent = "Content of the note";
 
         $apiKey = env('HUBSPOT_API_KEY');
-        $url = "https://api.hubapi.com/crm-objects/v1/objects/tickets/{$ticketId}";
+        $url = "https://api.hubapi.com/crm-objects/v1/objects/deals/$ticketId";
 
         $client = new Client();
         $response = $client->get($url, [
@@ -40,6 +40,6 @@ class HubSpotController extends Controller
             return response()->json(['error' => $responseData['message']], 400);
         }
 
-        return response()->json(['message' => 'Note added successfully'], 200);
+        return response()->json($responseData, 200);
     }
 }

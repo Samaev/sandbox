@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-
+use GuzzleHttp\Client;
 class HubSpotEngagementController extends Controller
 {
     public function createEngagement(Request $request)
     {
-        $url = "https://api.hubapi.com/engagements/v1/engagements";
+        $url = 'https://api.hubapi.com/engagements/v1/engagements';
 
         $querystring = [
-            'hapikey' => 'YOUR_HUBSPOT_API_KEY', // Replace with your actual HubSpot API key
+            'hapikey' => env('HUBSPOT_API_KEY'), // Replace with your actual HubSpot API key
         ];
 
         $payload = [
-            "engagement" => [
-                "active" => true,
-                "ownerId" => 1, // Replace with the ownerId
-                "type" => "NOTE",
-                "timestamp" => time() * 1000,
+            'engagement' => [
+                'active' => true,
+                'ownerId' => 26493413, // Replace with the ownerId
+                'type' => 'NOTE',
+                'timestamp' => time() * 1000,
             ],
-            "associations" => [
-                "ticketIds" => [$request->input('ticket_id')], // Replace with the actual ticket ID
+            'associations' => [
+                'dealIds' => 8753139687, // Replace with the actual deal ID
             ],
-            "metadata" => [
-                "body" => $request->input('note_content'),
+            'metadata' => [
+                'body' => 'note_body',
             ],
         ];
 
