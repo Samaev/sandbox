@@ -28,7 +28,7 @@ class HubSpotEngagementController extends Controller
         ]);
         $associationSpec = new AssociationSpec([
             'association_category' => 'HUBSPOT_DEFINED',
-            'association_type_id' => 0-5
+            'association_type_id' => 12
         ]);
         $publicAssociationsForObject = new PublicAssociationsForObject([
             'to' => $to,
@@ -44,7 +44,5 @@ class HubSpotEngagementController extends Controller
             return response()->json($apiResponse);
         } catch (ApiException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
-        }
-
-    }
+        }}
 }

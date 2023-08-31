@@ -9,11 +9,11 @@ class HubSpotController extends Controller
 {
     public function createNoteInTicket(Request $request)
     {
-        $ticketId = env('HUBSPOT_DEAL_ID'); // Ticket ID to which the note will be added
+        $dealId = env('HUBSPOT_DEAL_ID'); // Ticket ID to which the note will be added
         $noteContent = "Content of the note";
 
         $apiKey = env('HUBSPOT_API_KEY');
-        $url = "https://api.hubapi.com/crm-objects/v1/objects/deals/$ticketId";
+        $url = "https://api.hubapi.com/crm-objects/v1/objects/deals/$dealId";
 
         $client = new Client();
         $response = $client->get($url, [
