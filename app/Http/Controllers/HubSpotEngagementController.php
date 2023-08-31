@@ -3,47 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use HubSpot\Factory;
+use HubSpot\Client\Crm\Objects\Notes\ApiException;
+use HubSpot\Client\Crm\Objects\Notes\Model\AssociationSpec;
+use HubSpot\Client\Crm\Objects\Notes\Model\PublicAssociationsForObject;
+use HubSpot\Client\Crm\Objects\Notes\Model\PublicObjectId;
+use HubSpot\Client\Crm\Objects\Notes\Model\SimplePublicObjectInputForCreate;
+
 class HubSpotEngagementController extends Controller
 {
     public function createEngagement(Request $request)
     {
-        $url = 'https://api.hubapi.com/engagements/v1/engagements';
+        $accessToken = env('HUBSPOT_API_KEY'); // Replace with your access token
 
-        $querystring = [
-            'hapikey' => env('HUBSPOT_API_KEY'), // Replace with your actual HubSpot API key
+        $client = Factory::createWithAccessToken($accessToken);
+
+        $properties = [
+            'hs_timestamp' => '2019-10-30T03:30:17.883Z',
+            'hs_note_body' => 'Spoke with decision maker john',
+            'hubspot_owner_id' => '513323221'
         ];
-
-        $payload = [
-            'engagement' => [
-                'active' => true,
-                'ownerId' => 26493413, // Replace with the ownerId
-                'type' => 'NOTE',
-                'timestamp' => time() * 1000,
-            ],
-            'associations' => [
-                'dealIds' => 8753139687, // Replace with the actual deal ID
-            ],
-            'metadata' => [
-                'body' => 'note_body',
-            ],
-        ];
-
-        $client = new Client();
-        $response = $client->post($url, [
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            'query' => $querystring,
-            'json' => $payload,
+        $to = new PublicObjectId([
+            'id' => '8753139687'
+        ]);
+        $associationSpec = new AssociationSpec([
+            'association_category' => 'HUBSPOT_DEFINED',
+            'association_type_id' => 0-5
+        ]);
+        $publicAssociationsForObject = new PublicAssociationsForObject([
+            'to' => $to,
+            'types' => [$associationSpec]
+        ]);
+        $simplePublicObjectInputForCreate = new SimplePublicObjectInputForCreate([
+            'properties' => $properties,
+            'associations' => [$publicAssociationsForObject],
         ]);
 
-        $responseBody = json_decode($response->getBody(), true);
-
-        if (isset($responseBody['status']) && $responseBody['status'] === 'error') {
-            return response()->json(['error' => $responseBody['message']], 400);
+        try {
+            $apiResponse = $client->crm()->objects()->notes()->basicApi()->create($simplePublicObjectInputForCreate);
+            return response()->json($apiResponse);
+        } catch (ApiException $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
         }
 
-        return response()->json(['message' => 'Note added successfully'], 200);
     }
 }

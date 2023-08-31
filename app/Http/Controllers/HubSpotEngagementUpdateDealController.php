@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-class HubSpotController extends Controller
+class HubSpotEngagementUpdateDealController extends Controller
 {
-    public function createNoteInTicket(Request $request)
+    public function createNoteInDeal(Request $request)
     {
         $ticketId = env('HUBSPOT_DEAL_ID'); // Ticket ID to which the note will be added
         $noteContent = "Content of the note";
@@ -40,6 +40,6 @@ class HubSpotController extends Controller
             return response()->json(['error' => $responseData['message']], 400);
         }
 
-        return response()->json(['message' => "Note added successfully with $noteContent"], 200);
+        return response()->json($responseData, 200);
     }
 }
