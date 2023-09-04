@@ -15,12 +15,12 @@ class HubSpotEngagementController extends Controller
     public function createEngagement(Request $request)
     {
         $accessToken = env('HUBSPOT_API_KEY'); // Replace with your access token
-
+        $noteContent = $request['note'];
         $client = Factory::createWithAccessToken($accessToken);
 
         $properties = [
             'hs_timestamp' => '2019-10-30T03:30:17.883Z',
-            'hs_note_body' => 'Spoke with decision maker john',
+            'hs_note_body' => $noteContent,
             'hubspot_owner_id' => '513323221'
         ];
         $to = new PublicObjectId([

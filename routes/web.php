@@ -24,10 +24,11 @@ Route::get('/export-webpage', [WebPageExportController::class, 'export']);
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/extract-logos', [LogoExtractorController::class, 'extractLogos']);
 Route::get('/my-page', [MyPlaceController::class, 'index']);
 Route::get('/create-note', [HubSpotController::class, 'createNoteInTicket']);
-Route::get('/create-engagement', [HubSpotEngagementController::class, 'createEngagement']);
+Route::post('/create-engagement', [HubSpotEngagementController::class, 'createEngagement']);
 Route::get('/update-deal', [HubSpotEngagementUpdateDealController::class, 'createNoteInDeal']);
 
 
