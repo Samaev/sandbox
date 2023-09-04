@@ -51,10 +51,10 @@
              note: noteContent
         })
             .then(response => {
-                console.log('// Handle the response if needed' + noteContent);
+                console.log('You got response ' + noteContent);
             })
             .catch(error => {
-                console.log('// Handle errors if needed');
+                console.log('// Handle errors here');
             });
     }
 </script>
