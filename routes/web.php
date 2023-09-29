@@ -4,6 +4,7 @@ use App\Http\Controllers\HubSpotController;
 use App\Http\Controllers\HubSpotEngagementController;
 use App\Http\Controllers\HubSpotEngagementUpdateDealController;
 use App\Http\Controllers\MyPlaceController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogoExtractorController;
 /*
@@ -21,9 +22,9 @@ use App\Http\Controllers\WebPageExportController;
 Route::get('/export-webpage', [WebPageExportController::class, 'export']);
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/extract-logos', [LogoExtractorController::class, 'extractLogos']);
 Route::get('/my-page', [MyPlaceController::class, 'index']);
@@ -31,4 +32,6 @@ Route::get('/create-note', [HubSpotController::class, 'createNoteInTicket']);
 Route::post('/create-engagement', [HubSpotEngagementController::class, 'createEngagement']);
 Route::get('/update-deal', [HubSpotEngagementUpdateDealController::class, 'createNoteInDeal']);
 
+//courses
 
+Route::get('/', [PostController::class, 'index']);

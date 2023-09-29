@@ -1,0 +1,9 @@
+nav {
+    margin-bottom: 15px;
+}
+.card-img {
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
