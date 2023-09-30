@@ -40,7 +40,7 @@
             <h2 class="text-center m-5"><?=count($posts) ?> results for <i class="text-primary"><?=$_GET['search'] ?> has been found</i>.</h2>
         @else
             <div class="text-center">
-                <h2>Your request found nothing with <i><?=$_GET['search'] ?></i>. Try again</h2>
+                <h2 class="lead title">Your request found nothing with <i><?=$_GET['search'] ?></i>. Try again</h2>
                 <a class="btn btn-outline-primary m-5" href="{{ route('post.index') }}">Show all posts</a>
             </div>
         @endif
@@ -67,6 +67,7 @@
     @if(!isset($_GET['search']))
     <div class="row">
         <div class="col-md-12">
+{{--            links have been added automatically with tailwind classes--}}
             {{ $posts->links() }}
         </div>
     </div>
