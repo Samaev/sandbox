@@ -28,14 +28,23 @@
                 </li>
 
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="{{route('post.index') }}">
+                <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
     </div>
 </nav>
 <div class="container">
-
+    @if(isset($_GET['search']))
+        @if(count($posts)>0)
+            <h2 class="text-center m-5"><?=count($posts) ?> results for <i class="text-primary"><?=$_GET['search'] ?> has been found</i>.</h2>
+        @else
+            <div class="text-center">
+                <h2>Your request found nothing with <i><?=$_GET['search'] ?></i>. Try again</h2>
+                <a class="btn btn-outline-primary m-5" href="{{ route('post.index') }}">Show all posts</a>
+            </div>
+        @endif
+    @endif
     <div class="row">
         @foreach($posts as $post)
         <div class="col-6">
@@ -55,11 +64,13 @@
         @endforeach
 
     </div>
+    @if(!isset($_GET['search']))
     <div class="row">
         <div class="col-md-12">
             {{ $posts->links() }}
         </div>
     </div>
+    @endif
 </div>
 </body>
 </html>

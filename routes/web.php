@@ -35,3 +35,4 @@ Route::get('/update-deal', [HubSpotEngagementUpdateDealController::class, 'creat
 //courses
 
 Route::get('/', [PostController::class, 'index']);
+Route::get('post/', [PostController::class, 'index'])->name('post.index');
